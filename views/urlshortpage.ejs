@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #formid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #formid div {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Short URL</h1>
+    <form action="/api/shorturl" method="POST" id="formid">
+        <div>
+            <label for="url">URL: </label>
+            <input type="text" name="url" id="url" placeholder="Enter URL" required>
+        </div>
+        <div>
+            <label for="customUrl">Custom URL: </label>
+            <input type="text" name="customUrl" id="customUrl" placeholder="Enter Custom URL (optional)">
+        </div>
+        <button type="submit">Shorten</button>
+    </form>
+</body>
+
+</html>
