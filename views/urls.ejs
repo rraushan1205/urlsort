@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Url</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>View All Url</h1>
+    <% if (urls) { %>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>shorturl</th>
+                <th>Original Url</th>
+                <th>Visit Count</th>
+            </tr>
+            <% urls.forEach(element=> { %>
+                <tr>
+                    <td>
+                        <%= element.id %>
+                    </td>
+                    <td>
+                        <%= element.shorturl %>
+                    </td>
+                    <td>
+                        <%= element.redirecturl %>
+                    </td>
+                    <td>
+                        <%= element.visitCount %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <% } %>
+</body>
+
+</html>

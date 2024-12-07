@@ -10,8 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.set("views", "views");
-app.get("/", (req, res) => {
-  return res.render("index.ejs", { message: "Hello, World!", s: "h" });
+app.get("/url/viewAllUrls", async (req, res) => {
+  const getAllUrl = await prisma.url.findMany({});
+  return res.render("urls.ejs", { urls: getAllUrl });
 });
 app.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -21,16 +22,25 @@ app.get("/:id", async (req, res) => {
     },
   });
   if (getUrl) {
+    await prisma.url.update({
+      where: {
+        id: getUrl.id,
+      },
+      data: {
+        visitCount: {
+          increment: 1,
+        },
+      },
+    });
     return res.redirect(getUrl.redirecturl);
   }
   return res.render("error.ejs");
 });
-app.get("/url/shorturl", (req, res) => {
+app.get("/", (req, res) => {
   return res.render("urlshortpage.ejs");
 });
 app.post("/api/shorturl/", async (req, res) => {
   const body = req.body;
-  console.log(body);
   if (body.customUrl) {
     const existingUrl = await prisma.url.findFirst({
       where: {
@@ -70,8 +80,6 @@ app.post("/api/shorturl/", async (req, res) => {
     });
     res.send(`http://localhost:5000/${body.customUrl}`);
   }
-
-  //   res.send(url);
 });
 app.listen(5000, () => {
   console.log(`Server is running on port 5000`);
