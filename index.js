@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import { PrismaClient } from "@prisma/client";
 import { nanoid } from "nanoid";
 import ejs from "ejs";
+
 const prisma = new PrismaClient();
 // use `prisma` in your application to read and write data in your DB
 const app = express();
@@ -64,21 +65,25 @@ app.post("/api/shorturl/", async (req, res) => {
   }
   if (!body.customUrl) {
     const uniqueID = nanoid(5);
-    await prisma.url.create({
-      data: {
-        shorturl: uniqueID,
-        redirecturl: url,
-      },
+    // await prisma.url.create({
+    //   data: {
+    //     shorturl: uniqueID,
+    //     redirecturl: url,
+    //   },
+    // });
+    return res.render("redirecturlPage.ejs", {
+      redirectedUrl: `http://localhost:5000/${uniqueID}`,
     });
-    res.send(`http://localhost:5000/${uniqueID}`);
   } else {
-    await prisma.url.create({
-      data: {
-        shorturl: body.customUrl,
-        redirecturl: url,
-      },
+    // await prisma.url.create({
+    //   data: {
+    //     shorturl: body.customUrl,
+    //     redirecturl: url,
+    //   },
+    // });
+    return res.render("redirecturlPage.ejs", {
+      redirectedUrl: `http://localhost:5000/${body.customUrl}`,
     });
-    res.send(`http://localhost:5000/${body.customUrl}`);
   }
 });
 app.listen(5000, () => {

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Url</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: crgb(36, 143, 36);
+            align-items: center;
+            flex-direction: column;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: green;
+            color: white;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #28c428;
+        }
+
+        button:active {
+            background-color: #0e610e;
+        }
+
+        .url {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Redirect Url</h1>
+    <% if (redirectedUrl) { %>
+        <h3 class="url">
+            <%= redirectedUrl %>
+        </h3>
+        <% } %>
+            <button onclick="handleClick()">Back</button>
+            <script>
+                // Example function to be called on button click
+                function handleClick() {
+                    window.location.href = "/"
+                }
+            </script>
+            <script src="misc.js"></script>
+</body>
+
+</html>
